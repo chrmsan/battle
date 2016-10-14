@@ -17,15 +17,15 @@ class Battle < Sinatra::Base
 
   get '/play' do
     @attack = $attack
-    @player_1 = $game.player_1
-    @player_2 = $game.player_2
+    @player_1 = $game.player_1.name
+    @player_2 = $game.player_2.name
     erb(:play)
   end
 
   post '/attack' do
     $attack = !!params[:attack]
-    @player_1 = $player_1
-    @player_2 = $player_2
+    @player_1 = $game.player_1
+    @player_2 = $game.player_2
     $game.attack(@player_2)
     redirect '/play'
   end
