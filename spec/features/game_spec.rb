@@ -6,10 +6,14 @@ describe Game do
   let(:player_2) {double :player }
 
   describe '#attack' do
-    it 'damages the player' do
+    it 'damages player 2' do
       expect(player_2).to receive(:receive_damage)
       game.attack(player_2)
     end
+    # it 'damages player 1 after switches turn'
+    #   click_button("Attack!")
+    #   expect(player_1).to receive(:receive_damage)
+    # end
   end
 
   describe '#players' do
@@ -20,5 +24,14 @@ describe Game do
       expect(game.player_2).to eq player_2
     end
   end
+
+  describe '#switch turns' do
+    it 'switches turn after attack' do
+      sign_in_and_play
+      click_button 'Attack'
+      expect(page).to have_content('Jerry\'s turn')
+    end
+  end
+
 
 end
